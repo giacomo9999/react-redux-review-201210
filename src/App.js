@@ -1,29 +1,35 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import "./App.css";
 import Person from "./Person/Person";
 
-class App extends Component {
-  state = { currentNameIndex: 0, personNames: ["Alex", "Jim", "Carol"] };
+const App = (props) => {
+  const [personsState, setPersonsState] = useState({
+    currentNameIndex: 0,
+    personNames: ["Alex", "Jim", "Carol"],
+  });
 
-  switchNameHandler = () => {
-    console.log("Switching name...", this.state.currentNameIndex + 1);
-    this.setState({ currentNameIndex: this.state.currentNameIndex + 1 });
-    console.log(this.state);
+  const switchNameHandler = () => {
+    console.log("Switching name...");
+    setPersonsState({
+      currentNameIndex: personsState.currentNameIndex + 1,
+      personNames: personsState.personNames,
+    });
+    console.log(personsState);
   };
 
-  render() {
-    const nameToDisplay = (
-      <Person name={this.state.personNames[this.state.currentNameIndex]} />
-    );
-
-    return (
-      <div className="App">
-        <h1>I AM THE APP</h1>
-        <button onClick={this.switchNameHandler}>Switch Name</button>
-        {nameToDisplay}
-      </div>
-    );
-  }
-}
+  return (
+    <div className="App">
+      <h1>I AM THE APP</h1>
+      <button onClick={switchNameHandler}>Switch Name</button>
+      {
+        <Person
+          name={personsState.personNames[personsState.currentNameIndex]}
+        />
+      }
+    </div>
+  );
+};
 
 export default App;
+
+
