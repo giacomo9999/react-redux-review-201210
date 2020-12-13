@@ -5,14 +5,18 @@ import Person from "./Person/Person";
 const App = (props) => {
   const [personsState, setPersonsState] = useState({
     currentNameIndex: 0,
-    personNames: ["Alex", "Jim", "Carol"],
+    personsData: [
+      { name: "Alex", age: 38 },
+      { name: "Jim", age: 53 },
+      { name: "Carol", age: 50 },
+    ],
   });
 
-  const switchNameHandler = () => {
+  const switchPersonHandler = () => {
     console.log("Switching name...");
     setPersonsState({
       currentNameIndex: personsState.currentNameIndex + 1,
-      personNames: personsState.personNames,
+      personsData: personsState.personsData,
     });
     console.log(personsState);
   };
@@ -20,10 +24,11 @@ const App = (props) => {
   return (
     <div className="App">
       <h1>I AM THE APP</h1>
-      <button onClick={switchNameHandler}>Switch Name</button>
+      <button onClick={switchPersonHandler}>Switch Name</button>
       {
         <Person
-          name={personsState.personNames[personsState.currentNameIndex]}
+          name={personsState.personsData[personsState.currentNameIndex].name}
+          age={personsState.personsData[personsState.currentNameIndex].age}
         />
       }
     </div>
@@ -31,5 +36,3 @@ const App = (props) => {
 };
 
 export default App;
-
-
