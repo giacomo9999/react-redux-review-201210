@@ -4,7 +4,7 @@ import Person from "./Person/Person";
 
 class App extends Component {
   state = {
-    showPersonsList: true,
+    showPersonsList: false,
     currentNameIndex: 0,
     personsData: [
       { name: "Alex", age: 38 },
@@ -30,20 +30,37 @@ class App extends Component {
       console.log(this.state);
     }
   };
+
+  showPersons = () => {
+    this.setState({ showPersonsList: !this.state.showPersonsList });
+  };
+
   render() {
+    let persons = null;
+    if (this.state.showPersonsList) {
+      // persons = (
+      //   <div>
+      //     <Person
+      //       name={this.state.personsData[this.state.currentNameIndex].name}
+      //       age={this.state.personsData[this.state.currentNameIndex].age}
+      //       clickAction={this.switchPersonHandler}
+      //     />
+      //   </div>
+      persons = this.state.personsData.map((entry, index) => {
+        return (
+          <Person
+            key={index}
+            name={this.state.personsData[index].name}
+            age={this.state.personsData[index].age}
+          />
+        );
+      });
+    }
     return (
       <div className="App">
         <h1>I AM THE APP</h1>
-        <button onClick={this.switchPersonHandler}>Switch Name</button>
-        {this.state.showPersonsList ? (
-          <Person
-            name={this.state.personsData[this.state.currentNameIndex].name}
-            age={this.state.personsData[this.state.currentNameIndex].age}
-            clickAction={this.switchPersonHandler}
-          />
-        ) : (
-          <h1>--</h1>
-        )}
+        <button onClick={this.showPersons}>Show People</button>
+        {persons}
       </div>
     );
   }
