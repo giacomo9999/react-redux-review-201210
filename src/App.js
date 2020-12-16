@@ -31,6 +31,14 @@ class App extends Component {
     }
   };
 
+  clickPersonHandler = (personName) => {
+    console.log("Person clicked.");
+    const newState = this.state.personsData.filter(
+      (elem) => elem.name !== personName
+    );
+    this.setState({ personsData: newState });
+  };
+
   showPersons = () => {
     this.setState({ showPersonsList: !this.state.showPersonsList });
   };
@@ -38,18 +46,11 @@ class App extends Component {
   render() {
     let persons = null;
     if (this.state.showPersonsList) {
-      // persons = (
-      //   <div>
-      //     <Person
-      //       name={this.state.personsData[this.state.currentNameIndex].name}
-      //       age={this.state.personsData[this.state.currentNameIndex].age}
-      //       clickAction={this.switchPersonHandler}
-      //     />
-      //   </div>
       persons = this.state.personsData.map((entry, index) => {
         return (
           <Person
             key={index}
+            clicked={this.clickPersonHandler}
             name={this.state.personsData[index].name}
             age={this.state.personsData[index].age}
           />
@@ -59,7 +60,7 @@ class App extends Component {
     return (
       <div className="App">
         <h1>I AM THE APP</h1>
-        <button onClick={this.showPersons}>Show People</button>
+        <button onClick={this.showPersons}>Toggle People List</button>
         {persons}
       </div>
     );
