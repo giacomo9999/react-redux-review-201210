@@ -37,12 +37,16 @@
   }
 }
 
-.red {
-  color: red;
+h1,
+h2,
+h3,
+h4,
+p {
+  color: firebrick;
 }
 
-.white {
-  color: white;
+.red {
+  color: firebrick;
 }
 
 .bold {
