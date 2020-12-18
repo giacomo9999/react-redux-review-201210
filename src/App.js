@@ -1,6 +1,8 @@
 import React, { Component } from "react";
+// import Radium from "radium";
 import "./App.css";
 import Person from "./Person/Person";
+import styled from "styled-components";
 
 class App extends Component {
   state = {
@@ -44,6 +46,19 @@ class App extends Component {
   };
 
   render() {
+    let classes = ["white", "bold"].join(" ");
+    const style = {
+      backgroundColor: "#FF7F50",
+      ":hover": { backgroundColor: "lightblue" },
+    };
+
+    const StyledDiv = styled.div`
+       {
+        text-align: center;
+        background-color: red;
+      }
+    `;
+
     let persons = null;
     if (this.state.showPersonsList) {
       persons = this.state.personsData.map((entry, index) => {
@@ -56,13 +71,16 @@ class App extends Component {
           />
         );
       });
+      style.backgroundColor = "#ADFF2F";
     }
     return (
-      <div className="App">
-        <h1>I AM THE APP</h1>
-        <button onClick={this.showPersons}>Toggle People List</button>
+      <StyledDiv>
+        <h1 className={classes}>I AM THE APP</h1>
+        <button style={style} onClick={this.showPersons}>
+          Toggle People List
+        </button>
         {persons}
-      </div>
+      </StyledDiv>
     );
   }
 }
